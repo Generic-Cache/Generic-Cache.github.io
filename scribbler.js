@@ -24,7 +24,7 @@ if (document.getElementsByClassName('demo0').length > 0 && document.getElementsB
     rid="6149405056a8a56dd9da04b1b7ed0404" pck="http://archive.ubuntu.com/ubuntu/dists/disco-updates/restricted/i18n/Translation-en.xz" ucs="UPDATING" http_method="GET" response_time="-" cookie="-" request_time="0.000" 
     rid="b45112a6f7d7bfb0f9dec416f577200a" pck="http://archive.ubuntu.com/ubuntu/dists/disco-updates/restricted/i18n/Translation-en.xz" ucs="EXPIRED" http_method="GET" response_time="0.348" cookie="-" request_time="0.364" 
     rid="ed041497d1f249e4831464353d849a15" pck="http://archive.ubuntu.com/ubuntu/dists/disco-updates/restricted/i18n/Translation-en.xz" ucs="UPDATING" http_method="GET" response_time="-" cookie="-" request_time="0.000" 
-    rid="6ed03f2e4a09ce61d74e87e16c3ef920" pck="http://archive.ubuntu.com/ubuntu/pool/main/l/linux/linux-libc-dev_4.15.0-32.35_amd64.deb" ucs="MISS" http_method="GET" response_time="0.348, 0.352, 0.344, 0.360, 0.360, 0.368, 0.328, 0.632, 0.344" cookie="-" request_time="3.488"  http_method="GET" response_time="0.340, 0.348, 0.340, 0.344, 0.368, 0.352, 0.516, 0.560, 0.348, 0.544, 0.336, 0.356, 0.560" cookie="-" request_time="5.363" 
+    rid="6ed03f2e4a09ce61d74e87e16c3ef920" pck="http://archive.ubuntu.com/ubuntu/pool/main/l/linux/linux-libc-dev_4.15.0-32.35_amd64.deb" ucs="MISS" http_method="GET" response_time="0.348, 0.352, 0.344, 0.360, 0.360, 0.368, 0.328, 0.632, 0.344" cookie="-" request_time="3.488" 
 
     ^C `],
     [`exit`]
