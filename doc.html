@@ -1,0 +1,326 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Generic Cache Documentation - a code documentation page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="scribbler-global.css">
+    <link rel="stylesheet" href="scribbler-doc.css">
+    <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <div class="doc__bg"></div>
+    <nav class="header">
+      <h1 class="logo">Generic Cache <span class="logo__thin">Doc</span></h1>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="https://github.com/hlpr98/Caching-Service" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+        <li class="menu__item"><a href="index.html" class="link link--dark"><i class="fa fa-home"></i> Home</a></li>
+      </ul>
+    </nav>
+    <div class="wrapper">
+      <aside class="doc__nav">
+        <ul>
+          <li class="js-btn selected">Get Started</li>
+          <li class="js-btn">Performance Analysis</li>
+          <li class="js-btn">Vulnerability and Solutions</li>
+          <li class="js-btn">An example arcitecture</li>
+        </ul>
+      </aside>
+      <article class="doc__content">
+        <section class="js-section">
+          <h2 class="section__title">Get Started</h2>
+          <p>The "Generic Cache" caching service is a <a href="https://www.docker.com/" class="link link--dark">Docker</a> 
+            based generic cache, which uses <a href="https://www.nginx.com/" class="link link--dark">NGINX</a> as the underlying server.
+             This can be used to reduce latency in the internal LAN and avoid repeatative usage of the external access link. 
+             This can also be used to mimic a mirror server by using an authoritative server.
+             The Cache-Service can handle only HTTP requests. Thus only the HTTP requests must be directed to it, which can done using DNS and an SNI Proxy which would be used to handle HTTPS requests.</p>
+          <p>
+            To use Generic Cache on internal LAN, you would just need to set up Static IPs for each cache domain, 
+            then run an instance of  <span class="code code--inline">hlpr98/generic_cache:latest</span> (instruction are here), <span class="code code--inline">hlpr98/light_dns:latest </span> 
+            (<a href="https://github.com/hlpr98/Caching-Service/blob/master/Light_DNS/README.md" class="link link--dark">link to instructions</a>)
+            on each of the static IPs and an instance of  <span class="code code--inline">hlpr98/sni_proxy:latest</span> bound to port 443 of the docker host.
+          </p>
+          <h3 class="section__title">Installation</h3>
+          <div class="code__block code__block--notabs">
+            <h4 class="section__title">Installing Docker (pre-requisite)</h4>
+            <p>1. Setting up repository</p>
+            <pre class="code code--block">
+              <code>
+                $ sudo apt-get update;
+                $ sudo apt-get install \
+                  apt-transport-https \
+                  ca-certificates \
+                  curl \
+                  gnupg-agent \
+                  software-properties-common;
+                $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -;
+                $ sudo add-apt-repository \
+                "deb [arch=arm64] https://download.docker.com/linux/ubuntu \
+                $(lsb_release -cs) \
+                stable";
+              </code>
+            </pre>
+            <p>2. Installing Docker CE</p>
+            <pre class="code code--block">
+              <code>
+                $ sudo apt-get update;
+                $ sudo apt-get install docker-ce docker-ce-cli containerd.io;
+                $ sudo systemctl status docker;
+              </code>
+            </pre>
+            <p>3. Adding Username to Docker group/p>
+            <pre class="code code--block">
+              <code>
+                $ sudo usermod -aG docker ${USER};
+                $ su - ${USER};
+              </code>
+            </pre>
+            
+            <h4 class="section__title">Installing Curl (pre-requisite)</h4>
+            <pre class="code code--block">
+              <code>
+                $ sudo apt-get install curl
+              </code>
+            </pre>
+
+            <h4 class="section__title">Building and Using Generic Cache</h4>
+            <p>Generic cache can be either </p>
+            <ul>
+              <li>built from source prior to usage (as shown below).</li>
+              <li>the Docker image in DockerHub can be used directly too (follow the instructions from 4th step below)</li>
+            </ul>
+            <p>The steps to build the cache is as follows:</p>
+            <br>
+
+            <p>1. Clonning the repository</p>
+            <pre class="code code--block">
+              <code>
+                $ git clone https://github.com/hlpr98/Caching-Service.git
+              </code>
+            </pre>
+            <p>2. Building Generic Cache Docker image</p>
+            <pre class="code code--block">
+              <code>
+                $ cd Generic_cache;
+                $ docker build -t hlpr98/generic_cache .
+              </code>
+            </pre>
+            <p>3. Creating disk space for cache</p>
+            <pre class="code code--block">
+              <code>
+                $ mkdir /home/cache;
+                $ mkdir /home/cache/&lt;container name&gt;;
+                $ mkdir /home/cache/&lt;container name&gt;/data;
+                $ mkdir /home/cache/&lt;container name&gt;/logs;
+              </code>
+            </pre>
+            <p>4. Running the docker container as a daemon</p>
+            <pre class="code code--block">
+              <code>
+                $ docker run -td \
+                  --restart unless-stopped \
+                  --name &lt;container name&gt; \
+                  -v /home/cache/&lt;container name&gt;/data:/data/cache \
+                  -v /home/cache/&lt;container name&gt;/logs:/data/logs \
+                  -p &lt;Your IP&gt;:80:80 \
+                  hlpr98/generic_cache:latest;
+              </code>
+            </pre>        
+            <p>5. The Generic Cache also has the capability of allowing only requests for only perticular <span class="code code--inline">HOST_NAMES</span> (for ex: <span class="code code--inline">*.example.com</span>). 
+              By default it is set to allow every non-void hosts. To enable this,</p>
+              <pre class="code code--block">
+                <code>
+                  $ docker run -td \
+                    --restart unless-stopped \
+                    --name <container name> \
+                    -v /home/cache/&lt;container name&gt;/data:/data/cache \
+                    -v /home/cache/&lt;container name&gt;/logs:/data/logs \
+                    -e ALLOWED_HOSTS="~(&lt;RegExp for your HOST_NAMES&gt;)" \
+                    -p &lt;Your IP&gt;:80:80 \
+                    hlpr98/generic_cache:latest;
+                </code>
+              </pre>
+
+            <p>The Generic Cache also can be set to use your local cache as the <span class="code code--inline">UPSTREAM_RESOLVER</span>. Its by default <span class="code code--inline">8.8.8.8</span>.</p>
+              <pre class="code code--block">
+                <code>
+                  $ docker run -td \
+                    --restart unless-stopped \
+                    --name <container name> \
+                    -v /home/cache/&lt;container name&gt;/data:/data/cache \
+                    -v /home/cache/&lt;container name&gt;/logs:/data/logs \
+                    -e UPSTREAM_DNS="&lt;Your local cache IP&gt;" \
+                    -p &lt;Your IP&gt;:80:80 \
+                    hlpr98/generic_cache:latest;
+                </code>
+              </pre>
+          </div>
+          <hr />
+        </section>
+
+        <section class="js-section">
+          <h2 class="section__title">Performance analysis</h2>
+          <p>Generic Cache comes out of the box with a few performance analysis tools such as: </p>
+          <ul>
+            <li>A tool to display the live traffic and show if they were misses or hits or any other.</li>
+            <li>A tool to know to cumulative stats of the current day</li>
+            <li>A tool to know the cumulative stats of any day within the past 14 days.</li>
+            <li>A bandwidth savings analysis tool.</li>
+          </ul>
+          <p>The follwing section talks about how to use these tools.</p>
+          
+          <h3 class="section__title">Monitoring</h3>
+          <div class="code__block code__block--notabs">
+            <h4 class="section__title">Dispalying the live traffic</h4>
+            <p>1. Opening an iteractive bash on the cache's container. (Note that the cache should be running at this point)</p>
+            <pre class="code code--block">
+              <code>
+                $ docker exec -it &lt;container name&gt; bash
+              </code>
+            </pre>
+            <p>2. Executing the <span class="code code--inline">scripts/display.sh</span> script to show the live status of the cache with colour coded output.</p>
+            <pre class="code code--block">
+              <code>
+                $ ./display
+              </code>
+            </pre>  
+            <p>This shows dynamically cache MISS or HIT or BYPASS etc. with colour coded outputs of the logs corresponding to that particular request (as seen in the demo on in first page).
+               Upon terminating its execution (Ctrl + C), it displays the MISS ration, HIT ration etc.</p>
+
+            <br>
+            <h4 class="section__title">Dispalying the stats of the current day</h4>
+            <p>1. Opening an iteractive bash on the cache's container. (Note that the cache should be running at this point)</p>
+            <pre class="code code--block">
+              <code>
+                $ docker exec -it &lt;container name&gt; bash
+              </code>
+            </pre>
+            <p>2. Executing the <span class="code code--inline">scripts/stats.sh</span> script to show the complete status of the server for the current day.</p>
+            <pre class="code code--block">
+              <code>
+                $ ./stats.sh
+              </code>
+            </pre>  
+            <p>This shows total number of requests made to the server, number of cache MISS or HIT or BYPASS etc, as seen in the example below:</p>
+            <img src="stats.PNG" alt="Stats of the current day">
+
+            <br>
+            <h4 class="section__title">Dispalying the stats of the some other day</h4>
+            <p>1. Opening an iteractive bash on the cache's container. (Note that the cache should be running at this point)</p>
+            <pre class="code code--block">
+              <code>
+                $ docker exec -it &lt;container name&gt; bash
+              </code>
+            </pre>
+            <p>2. Executing the <span class="code code--inline">scripts/stats_file.sh</span> script to show the complete status of the server for a given day based on the 
+              <span class="code code--inline">log file</span> given as argument. All log files are in <span class="code code--inline">/data/logs/</span>.</p>
+            <pre class="code code--block">
+              <code>
+                $ ./stats_file.sh
+                $ The log file which needs to be analysed: &lt;path to the files to be analysed&gt;
+              </code>
+            </pre>  
+            <p>This shows total number of requests made to the server, number of cache MISS or HIT or BYPASS etc, as seen in the example above.</p>
+
+            <br>
+            <h4 class="section__title">Obtaining the bandwidth savings data.</h4>
+            <p>1. Opening an iteractive bash on the cache's container. (Note that the cache should be running at this point)</p>
+            <pre class="code code--block">
+              <code>
+                $ docker exec -it &lt;container name&gt; bash
+              </code>
+            </pre>
+            <p>2. Executing the <span class="code code--inline">scripts/calculate.py</span> script to show the amount of bandwidth saved on a given day based on the 
+              <span class="code code--inline">log file</span> given as argument. All log files are in <span class="code code--inline">/data/logs/</span>.</p>
+            <pre class="code code--block">
+              <code>
+                $ ./calculate.py
+                $ The log file which needs to be analysed: &lt;path to the files to be analysed&gt;
+              </code>
+            </pre>  
+          
+          <h3 class="section__title">Testing</h3>
+          <p>In order to stress test or test the functioning of Generic Cache, it can be bound to <span class="code code--inline">127.0.0.1</span></p>
+          <div class="code__block code__block--notabs">
+            <p>1. Creating a Docker container named <span class="code code--inline">test</span>. bound to <span class="code code--inline">127.0.0.1</span></p>
+            <pre class="code code--block">
+              <code>
+                $ docker run -td \
+              --restart unless-stopped \
+              --name test \
+              -v /home/cache/test/data:/data/cache \
+              -v /home/cache/test/logs:/data/logs \
+              -p 127.0.0.1:80:80 \
+              hlpr98/generic_cache:latest;
+              </code>
+            </pre>
+            <p>2. Opening an iteractive bash on the container.</p>
+            <pre class="code code--block">
+              <code>
+                $ docker exec -it test bash
+              </code>
+            </pre>  
+            <p>3. Executing the <span class="code code--inline">scripts/display.sh</span> script to show the live status of the cache with colour coded output.</p>
+            <pre class="code code--block">
+              <code>
+                $ ./display
+              </code>
+            </pre>
+            <p>4. Executing the <span class="code code--inline">/Caching-Service/Scripts/testing.sh</span> on a differnt terminal (in the host system not on the docker container).</p>
+            <pre class="code code--block">
+              <code>
+                $ cd Scripts;
+                $ ./testing.sh;
+              </code>
+            </pre>
+            <p>5. Requesting for custom domains.</p>
+            <pre class="code code--block">
+              <code>
+                $ curl http://&lt;custom domain&gt;/<URI> --resolve &lt;custom domain&gt;:80:127.0.0.1
+              </code>
+            </pre>
+            <p>For example:</p>
+            <pre class="code code--block">
+              <code>
+                $ curl http://ncert.nic.in/ --resolve ncert.nic.in:80:127.0.0.1
+              </code>
+            </pre>
+            <p>Look for cache MISS or HIT or BYPASS etc. on the shell executing display.sh. Upon terminating its execution (Ctrl + C), it displays the MISS ration, HIT ration etc.</p>
+          </div> 
+        </div>
+        <hr />
+        </section>
+
+          
+        <section class="js-section">
+          <h2 class="section__title">Vulnerability and Solutions</h2>
+          <p>Due to the "generic" nature of the proposed proxy cache server, we encountered a major security risk while deploying the system i.e.,
+             <b>Potential Denial of Service Attack</b>. If users within an organisation uses this server as their primary proxy server, then the proposed cache would be 
+             caching records that do not necessarily belong to the host-server or website it is responsible for, hence, this could be misused to perform an
+             Denial of Service attack. </p>
+          <p>The solution to this vulnerability is to use <i>regular expression matching</i> of the "Allowed host server names" 
+            (i.e., the host-servers and the websites proxy cache server is responsible for) with <span class="code code--inline">$hostname</span> in the <span class="code code--inline">$request_uri</span>. If the regular expressions do not match, 
+            then the request is not processed, instead a <span class="code code--inline">HTTP_403</span> is returned.</p>
+          <hr />
+        </section>
+        <section class="js-section">
+          <h2 class="section__title">An example arcitecture for for setting up a cluster of caching services</h2>
+          <p>The following figure represents the complete architeture of a cluter of caching services running simultaneously but inpendently on separate Virtual Machines.
+          </p>
+          <img src="arch.PNG" alt="An example architeture for setup" style="width:900px;height:600px;">
+
+
+        </section>
+      </article>
+    </div>
+
+    <footer class="footer">Generic Cache</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script>
+  </body>
+</html>

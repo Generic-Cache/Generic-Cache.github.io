@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Generic Cache</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,600,700,800,900" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/railscasts.min.css">
+      <link rel="stylesheet" href="scribbler-global.css">
+      <link rel="stylesheet" href="scribbler-landing.css">
+      <link rel="author" href="humans.txt">
+  </head>
+  <body>
+    <nav>
+      <div class="logo"></div>
+      <ul class="menu">
+        <div class="menu__item toggle"><span></span></div>
+        <li class="menu__item"><a href="doc.html" class="link link--dark"><i class="fa fa-book"></i> Documentation</a></li>
+        <li class="menu__item"><a href="https://github.com/hlpr98/Caching-Service" class="link link--dark"><i class="fa fa-github"></i> Github</a></li>
+      </ul>
+    </nav>
+    <div class="hero">
+      <h1 class="hero__title">Generic Cache</h1>
+      <p class="hero__description">Enhancing QoS in a University Network by using Containerized Generic Cache</p>
+    </div>
+    <div class="hero__terminal">
+      <pre>
+        <!-- Place your demo code here -->
+        <code class="shell-session demo0">hyperyolo ~ $ </code>
+        <code class="shell-session demo1">hyperyolo ~ $ </code>
+        <code class="shell-session demo2">root@linuxcache ~ $ </code>
+        <code class="shell-session demo3">root@linuxcache ~ $ </code>
+        <code class="shell-session" >hyperyolo ~ $ </code>
+      </pre>
+    </div>
+    <div class="wrapper">
+      <div class="installation">
+        <h1 class="section__title">About</h1>
+        <!-- <div class="tab__container">
+          <ul class="tab__menu">
+            <li class="tab active" data-tab="mac">mac</li>
+            <li class="tab" data-tab="linux">linux</li>
+            <li class="tab" data-tab="win">win</li>
+          </ul>
+          <pre class="nohighlight code">
+            <code class="tab__pane active mac">$  brew install scribbler</code>
+            <code class="tab__pane linux">$  apt-get install scribbler</code>
+            <code class="tab__pane win">$  gem install scribbler</code>
+          </pre>
+        </div> -->
+        <p> Ubiquitous access and enhanced Internet speeds have paved ways for online educational reforms at a large scale. 
+            There has been a widespread adoption of modern educational applications, ranging from interactive applets, video lessons and online quizzes to remotely conducting laboratory experiments. 
+            Consequently, there is a demand to provision more bandwidth to satisfy users expectations. 
+            <b><i>Generic Cache</i></b> is an approach to enhance the Quality of Service (QoS) in a University campus network and efficiently utilize the available bandwidth. </p>
+        <p> Typically within an University, some requests are similar, e.g., operating system updates, Linux package installs, Python pip packages and others. 
+            These are huge data transfer requests ranging from Megabytes to Gigabytes, and consume a large amount of bandwidth on external access links to the Internet. 
+            Redundant requests of this nature from a large user base lead to enormous wastage of bandwidth.</p>
+        
+        <p> <b><i>Generic Cache</i></b> overcomes this concern by setting up a <i>containerized forward proxy</i> function as a cache for popular traffic in the University. 
+            A large number of redundant requests can be successfully served from this Virtualized Network Function (VNF), thereby enhancing the QoS and efficiently utilizing the available bandwidth.
+            Since this cache is implemented as a VNF, it is portable and easy to deploy.</p>
+               
+        <p> The features of Generic Cache are outlined below:</p>
+      </div>
+      <div class="feature">
+        <div class="feature__item">
+          <h3 class="section__title">Rapid setup</h3>
+          <p>Start using Generic with just couple of lines of shell commands on any system. Due to the "Generic" nature, it can be used to cache multiple webistes without any changes to config/setup process.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Robust monitoring</h3>
+          <p>Analyse the performance of the system in the network in real-time. Also get detailed stats if required</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Secure</h3>
+          <p>Generic cache is as secure as the Gateway used in network. It has also been quality tested against fishing and DDOS attacks.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Configurability</h3>
+          <p>Generic cache is extremely configurable. To make things more robust Generic cache also provides <span class="code code--inline">regex parsing</span> out of the box. All these configuration are in a single file and can easily be changed anytime</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Portability</h3>
+          <p>Generic Cache is implemented as a VNF and thus is portable (both data and process) from one system to another with ease.</p>
+        </div>
+        <div class="feature__item">
+          <h3 class="section__title">Automated data management and logging</h3>
+          <p>Generic Cache out of the box has automated data management service (which uses LRU strategy) and logging mechanisms for all the collected stats.</p>
+        </div>
+      </div>
+      <!-- <div class="keybinding">
+        <ul class="keybinding__detail">
+          <h3 class="keybinding__title">Default Keybindings</h3>
+          <li>Quit without saving <span class="keybinding__label">Ctrl+C</span></li>
+          <li>Save <span class="keybinding__label">Cmd+S</span></li>
+          <li>Save and Quit <span class="keybinding__label">Ctrl+D</span></li>
+          <li>Undo <span class="keybinding__label">Cmd+Z</span></li>
+        </ul>
+        <ul class="keybinding__detail">
+          <h3 class="keybinding__title">Markdown Keybindings</h3>
+          <li><span class="keybinding__label">Ctrl+A</span> Insert Link Markdown</li>
+          <li><span class="keybinding__label">Ctrl+I</span> Insert Image Markdown</li>
+          <li><span class="keybinding__label">Ctrl+V</span> Insert YouTube Video</li>
+          <li><span class="keybinding__label">Ctrl+T</span> Insert Table</li>
+        </ul>
+      </div> -->
+      <div class="callout">
+        <p>Read our documentation for more detailed information</p>
+        <a href="doc.html" class="button--primary">Documentation</a>
+      </div>
+    </div>
+    <div class="changelog">
+      <div class="wrapper">
+        <h2 class="section__title">Performance statistics</h2>
+        <p>Generic Cache has been deployed in NITK since Jan 2019. The following graphs depict the performance of the system when fuctioning as a Cache for "Ubuntu" over a period of 1 month.
+          The Deployed system has proven to be robust in performance in an instituion with over 12k strudents. It has also proven to save significant amounts of data each day and also considerably imporving the speed of internet.
+        </p>
+        <h3 class="changelog__title">The following is a graph shows the overall Miss and Hit ratio of the cache.</h3>
+        <div class="changelog__detail">
+          <p>From the following graph, we can clearly note that the cache stabilised at <b>83%</b> of <span style="color: green"><b>HIT ratio</b></span> ratio and <b>14%</b> <span style="color: red"><b>MISS ratio</b></span> within  a  week’s  worth  of  time.</p>
+        </div>
+        <br>
+        <div id="miss_hits_div" style="width: 100%; height: 70vh;"></div>
+
+        <h3 class="changelog__title">The following is a graph shows total traffic recieved and the bandwidth saved on each day</h3>
+        <div class="changelog__detail">
+          <p>From the following graph, we can see that we are able to save about <b>34GB</b> of data each day by just caching one website.</p>
+        </div>
+        <br>
+        <div id="traffic_div" style="width: 100%; height: 90vh;"></div>
+
+        <h3 class="changelog__title">The following tables show the performance of Generic Cache w.r.t Latency and Cuncurrency relative to the origin server.</h3>
+        <div class="changelog__detail">
+          <p>From the following tables, show a clear reduction in latency and increase in availability, throughput and concurrency as compared to the origin server.
+             This improvement is both due to the higher bandwidth of the internal LAN and the significantly smaller size of audience the cache server has to respond at a time,
+             when compared to that of the origin servers.</p>
+        </div>
+        <br>
+        <div id="tab1" style="display: flex;">
+          <table style="float:left; margin-right: 10px; width:45%; border: 2px solid black;">
+          <caption align="bottom" style="font-size: 18px;">Table showing the Latency measured</caption>
+          <thead>
+          <tr class="header">
+          <th style="text-align: left;"><strong>Server</strong></th>
+          <th style="text-align: left;"><strong>Thread stats</strong></th>
+          <th style="text-align: left;"><strong>Avg</strong></th>
+          <th style="text-align: left;"><strong>Stdev</strong></th>
+          <th style="text-align: left;"><strong>Max</strong></th>
+          <th style="text-align: left;"><strong>+/- Stdev</strong></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="odd">
+          <td rowspan=3style="text-align: left;">Cache Server</td>
+          <td style="text-align: left;">Latency</td>
+          <td style="text-align: left;">74.21ms</td>
+          <td style="text-align: left;">314.04ms</td>
+          <td style="text-align: left;">6.16s</td>
+          <td style="text-align: left;">95.92%</td>
+          </tr>
+          <tr class="even">
+          <!-- <td style="text-align: left;">server</td> -->
+          <td style="text-align: left;">Req/sec</td>
+          <td style="text-align: left;">27.00</td>
+          <td style="text-align: left;">1.00</td>
+          <td style="text-align: left;">28.00</td>
+          <td style="text-align: left;">100.00%</td>
+          </tr>
+          <tr class="odd" style="border-bottom: 2px solid black;">
+          <!-- <td style="text-align: left;"></td> -->
+          <td style="text-align: left;">Transfer/sec</td>
+          <td style="text-align: left;">98.35KB</td>
+          <td style="text-align: left;">-</td>
+          <td style="text-align: left;">-</td>
+          <td style="text-align: left;">-</td>
+          </tr>
+          <tr class="even">
+          <td rowspan=3 style="text-align: left;">Origin Server</td>
+          <td style="text-align: left;">Latency</td>
+          <td style="text-align: left;">194.47ms</td>
+          <td style="text-align: left;">26.13ms</td>
+          <td style="text-align: left;">606.21s</td>
+          <td style="text-align: left;">93.10%</td>
+          </tr>
+          <tr class="odd">
+          <!-- <td style="text-align: left;">server</td> -->
+          <td style="text-align: left;">Req/sec</td>
+          <td style="text-align: left;">25.25</td>
+          <td style="text-align: left;">14.83</td>
+          <td style="text-align: left;">46.00</td>
+          <td style="text-align: left;">77.36%</td>
+          </tr>
+          <tr class="even">
+          <!-- <td style="text-align: left;"></td> -->
+          <td style="text-align: left;">Transfer/sec</td>
+          <td style="text-align: left;">83.86KB</td>
+          <td style="text-align: left;">-</td>
+          <td style="text-align: left;">-</td>
+          <td style="text-align: left;">-</td>
+          </tr>
+          </tbody>
+          </table>
+          <table style="float:left; width:45%; border: 2px solid black;">
+            <caption align="bottom" style="font-size: 18px;";">Table showing the Concurrency achieved</caption>
+            <thead>
+            <tr class="header">
+            <th style="text-align: left;"><strong>Server</strong></th>
+            <th style="text-align: left;"><strong>Measured quantity</strong></th>
+            <th style="text-align: left;"><strong>Result</strong></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="odd">
+            <td rowspan=6 style="text-align: left;">Cache server</td>
+            <td style="text-align: left;">Transactions</td>
+            <td style="text-align: left;">1697 hits</td>
+            </tr>
+            <tr class="even">
+            <!-- <td style="text-align: left;"></td> -->
+            <td style="text-align: left;">Availability</td>
+            <td style="text-align: left;">100.00%</td>
+            </tr>
+            <tr class="odd">
+            <!-- <td style="text-align: left;"></td> -->
+            <td style="text-align: left;">Response time</td>
+            <td style="text-align: left;">1.65 sec</td>
+            </tr>
+            <tr class="even">
+            <!-- <td style="text-align: left;"></td> -->
+            <td style="text-align: left;">Transaction rate</td>
+            <td style="text-align: left;">58.30 trans/sec</td>
+            </tr>
+            <tr class="odd">
+            <!-- <td style="text-align: left;"></td> -->
+            <td style="text-align: left;">Concurrency</td>
+            <td style="text-align: left;">96.00</td>
+            </tr>
+            <tr style="border-bottom: 2px solid black;" class="even">
+            <!-- <td style="text-align: left;"></td> -->
+            <td style="text-align: left;">Longest transaction</td>
+            <td style="text-align: left;">7.56</td>
+            </tr>
+            <tr class="odd">
+            <td rowspan=6 style="text-align: left;">Origin server</td>
+            <td style="text-align: left;">Transactions</td>
+            <td style="text-align: left;">312 hits</td>
+            </tr>
+            <tr class="even">
+            <!-- <td style="text-align: left;"></td> -->
+            <td style="text-align: left;">Availability</td>
+            <td style="text-align: left;">86.19%</td>
+            </tr>
+            <tr class="odd">
+            <!-- <td style="text-align: left;"></td> -->
+            <td style="text-align: left;">Response time</td>
+            <td style="text-align: left;">4.16 sec</td>
+            </tr>
+            <tr class="even">
+            <!-- <td style="text-align: left;"></td> -->
+            <td style="text-align: left;">Transaction rate</td>
+            <td style="text-align: left;">10.61 trans/sec</td>
+            </tr>
+            <tr class="odd">
+            <!-- <td style="text-align: left;"></td> -->
+            <td style="text-align: left;">Concurrency</td>
+            <td style="text-align: left;">44.10</td>
+            </tr>
+            <tr class="even">
+            <!-- <td style="text-align: left;"></td> -->
+            <td style="text-align: left;">Longest transaction</td>
+            <td style="text-align: left;">9.71</td>
+            </tr>
+            </tbody>
+            </table>
+          </div>
+      </div>
+    </div>
+    <footer class="footer">Generic Cache</footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <!-- Adding the charts -->
+    <script src="https://www.amcharts.com/lib/4/core.js"></script>
+    <script src="https://www.amcharts.com/lib/4/charts.js"></script>
+    <script src="https://www.amcharts.com/lib/4/maps.js"></script>
+    <script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="scribbler.js"></script>
+  </body>
+</html>
